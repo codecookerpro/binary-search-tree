@@ -10,7 +10,7 @@ import _ from 'lodash'
 function App() {
   const [tree, setTree] = useState(new BinarySearchTree())
 
-  const handleInsert = () => {
+  const handleInsert = (event) => {
     let value = _.random(Config.min, Config.max)
     const newTree = clone(tree)
     newTree.insert(value)
@@ -18,16 +18,18 @@ function App() {
   }
 
   const handleRemove = (node) => {
-    console.log(node)
     const value = parseInt(node.name)
     const newTree = clone(tree)
     newTree.remove(value)
     setTree(newTree)
   }
 
+  useEffect(() => {
+    document.getElementsByTagName('body')[0].onkeyup = handleInsert
+  })
+
   return (
     <div id="App">
-      <button onClick={handleInsert}>add</button>
       <Graph data={tree} handleRemove={handleRemove} />
     </div>
   )
