@@ -113,14 +113,6 @@ export class BinarySearchTree {
 	}
 }
 
-export const copyInstance = (original) => {
-	var copied = Object.assign(
-		Object.create(Object.getPrototypeOf(original)),
-		original
-	)
-	return copied
-}
-
 const traverse = (obj) => {
 	if (!obj) return null
 

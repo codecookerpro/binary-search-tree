@@ -1,0 +1,20 @@
+/* graph.css */
+
+.root > circle {
+  fill: red;
+}
+
+.root text {
+  text-anchor: start;
+  x: 10 !important;
+  y: 10;
+}
+
+.branch > circle {
+  fill: yellow;
+}
+
+.leaf > circle {
+  fill: green;
+  r: 40;
+}

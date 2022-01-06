@@ -1,39 +1,34 @@
 import React from 'react'
 import Tree from 'react-d3-tree'
 import { format } from '../utils/tree-node'
+import './graph.css'
 
-const style = {
-  node: {
-    circle: {
-      fill: '#d16ba5',
-      name: {
-        fontFamily: `'Roboto', sans-serif`,
-        fontSize: '1.6rem',
-      },
-    },
-  },
-  leafNode: {
-    circle: {
-      fill: '#5ffbf1',
-      name: {
-        fontFamily: `'Roboto', sans-serif`,
-        fontSize: '1.6rem',
-      },
-    },
-  },
-}
+const renderNodeWithCustomEvents = ({ nodeDatum, toggleNode, handleRemove }) => (
+  <g>
+    <circle r="25" onClick={() => handleRemove(nodeDatum)} />
+    <text
+      fill="black"
+      strokeWidth="1"
+      textAnchor="middle"
+      x="0"
+      y="5"
+      onClick={() => handleRemove(nodeDatum)}
+    >
+      {nodeDatum.name}
+    </text>
+  </g>
+)
 
 const Graph = ({ data, handleRemove }) => {
+  const handleNodeClick = (nodeDatum) => {
+    window.alert(
+      nodeDatum.children ? 'Clicked a branch node' : 'Clicked a leaf node.'
+    )
+  }
+
   return (
     <Tree
-      styles={{
-        nodes: {
-          node: style.node,
-          leafNode: style.leafNode,
-        },
-      }}
-      collapsible={false}
-      orientation="vertical"
+      orientation={'vertical'}
       data={format(data)}
       translate={{
         x: document.getElementById('App')
@@ -43,7 +38,9 @@ const Graph = ({ data, handleRemove }) => {
           ? document.getElementById('App').clientHeight / 2
           : window.innerHeight / 2,
       }}
-      onNodeClick={handleRemove}
+      renderCustomNodeElement={(rd3tProps) =>
+        renderNodeWithCustomEvents({ ...rd3tProps, handleRemove })
+      }
     />
   )
 }
