@@ -3,27 +3,30 @@ import Config from '../../config'
 
 import React, { useState, useEffect } from 'react'
 import Graph from '../../components/graph'
-import { TreeNode, insert } from '../../utils/tree-node'
+import { BinarySearchTree, copyInstance, format } from '../../utils/tree-node'
 import _ from 'lodash'
 
-const sample = [2, 1, 3, 10, 13, 14, 6, 4, 7]
-
 function App() {
-  const [data, setData] = useState({ root: null })
-  const [index, setIndex] = useState(0)
+  const [tree, setTree] = useState(new BinarySearchTree())
 
-  const onAdd = () => {
-    let number = _.random(Config.min, Config.max)
-    number = sample[index]
-    const newData = insert(data, number)
-    setData(newData)
-    setIndex(index + 1)
+  const handleInsert = () => {
+    let value = _.random(Config.min, Config.max)
+    const newTree = copyInstance(tree)
+    newTree.insert(value)
+    setTree(newTree)
+  }
+
+  const handleRemove = (node, event) => {
+    const value = parseInt(node.data.name)
+    const newTree = copyInstance(tree)
+    newTree.remove(value)
+    setTree(newTree)
   }
 
   return (
     <div id="App">
-      <button onClick={onAdd}>add</button>
-      <Graph data={data} />
+      <button onClick={handleInsert}>add</button>
+      <Graph data={tree} handleRemove={handleRemove} />
     </div>
   )
 }

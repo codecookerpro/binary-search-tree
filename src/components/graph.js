@@ -23,7 +23,7 @@ const style = {
   },
 }
 
-const Graph = ({ data }) => {
+const Graph = ({ data, handleRemove }) => {
   return (
     <Tree
       styles={{
@@ -43,6 +43,7 @@ const Graph = ({ data }) => {
           ? document.getElementById('App').clientHeight / 2
           : window.innerHeight / 2,
       }}
+      onNodeClick={handleRemove}
     />
   )
 }
