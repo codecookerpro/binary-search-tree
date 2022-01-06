@@ -35,6 +35,14 @@ const Graph = ({ data }) => {
       collapsible={false}
       orientation="vertical"
       data={format(data)}
+      translate={{
+        x: document.getElementById('App')
+          ? document.getElementById('App').clientWidth / 2
+          : window.innerWidth / 2,
+        y: document.getElementById('App')
+          ? document.getElementById('App').clientHeight / 2
+          : window.innerHeight / 2,
+      }}
     />
   )
 }

@@ -1,11 +1,14 @@
 export const TreeNode = (value) => {
-	this.value = value
-	this.left = null
-	this.right = null
+	return {
+		value: value,
+		left: null,
+		right: null,
+	}
 }
 
-export const insert = (data, value) => {
-	let node = new TreeNode(value)
+export const insert = (source, value) => {
+	let data = Object.assign({}, source)
+	let node = TreeNode(value)
 	if (!data.root) data = { root: node }
 	else {
 		let current = data.root
