@@ -11,6 +11,9 @@ function App() {
   const [tree, setTree] = useState(new BinarySearchTree())
 
   const handleInsert = (event) => {
+    // check keycode is space key
+    if (event && event?.keyCode != Config.actionKey) return
+
     let value = _.random(Config.min, Config.max)
     const newTree = clone(tree)
     newTree.insert(value)

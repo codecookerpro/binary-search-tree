@@ -20,12 +20,6 @@ const renderNodeWithCustomEvents = ({ nodeDatum, toggleNode, handleRemove }) => 
 )
 
 const Graph = ({ data, handleRemove }) => {
-  const handleNodeClick = (nodeDatum) => {
-    window.alert(
-      nodeDatum.children ? 'Clicked a branch node' : 'Clicked a leaf node.'
-    )
-  }
-
   return (
     <Tree
       orientation={'vertical'}
@@ -41,6 +35,8 @@ const Graph = ({ data, handleRemove }) => {
       renderCustomNodeElement={(rd3tProps) =>
         renderNodeWithCustomEvents({ ...rd3tProps, handleRemove })
       }
+      enableLegacyTransitions={true}
+      transitionDuration={300}
     />
   )
 }
